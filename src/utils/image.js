@@ -160,12 +160,17 @@ const getImageFormat = body => {
 };
 
 const resolveImageFromUrl = async (src, options) => {
-  const { uri, body, headers, method = 'GET' } = src;
+  const { uri, body, headers, includeCredentials, method = 'GET' } = src;
 
   const data =
     !BROWSER && getAbsoluteLocalPath(uri)
       ? await fetchLocalFile(uri, options)
-      : await fetchRemoteFile(uri, { body, headers, method });
+      : await fetchRemoteFile(uri, {
+          body,
+          headers,
+          method,
+          init: { credentials: includeCredentials ? 'include' : undefined },
+        });
 
   const extension = getImageFormat(data);
 

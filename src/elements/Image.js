@@ -99,7 +99,12 @@ class Image extends Base {
   }
 
   async fetch() {
-    const { cache, safePath, allowDangerousPaths } = this.props;
+    const {
+      cache,
+      safePath,
+      allowDangerousPaths,
+      includeCredentials,
+    } = this.props;
 
     if (!this.src) {
       warning(false, 'Image should receive either a "src" or "source" prop');
@@ -111,6 +116,7 @@ class Image extends Base {
         cache,
         safePath,
         allowDangerousPaths,
+        includeCredentials,
       });
     } catch (e) {
       this.image = { width: 0, height: 0 };
