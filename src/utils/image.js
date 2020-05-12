@@ -169,7 +169,7 @@ const resolveImageFromUrl = async (src, options) => {
           body,
           headers,
           method,
-          init: { credentials: includeCredentials ? 'include' : undefined },
+          credentials: includeCredentials ? 'include' : undefined,
         });
 
   const extension = getImageFormat(data);
